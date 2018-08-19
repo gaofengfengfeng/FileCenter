@@ -35,7 +35,13 @@ public class ImgController {
         request.setAttribute("jResponse", jResponse);
         String path = "/Users/gaofeng/Pictures/image/" + base64ImgUploadReq.getFileName();
         JLog.info("uploadBase64:" + base64ImgUploadReq.getFileBase64());
-        ImageBase64Utils.base64ToImage(base64ImgUploadReq.getFileBase64(), path);
+        boolean result = ImageBase64Utils.base64ToImage(base64ImgUploadReq.getFileBase64(), path);
+
+        if (!result) {
+            jResponse.setErrNo(102072231);
+            jResponse.setErrMsg("save img error");
+            return jResponse;
+        }
 
         String fileSyncUri = path;
         String downloadFileName = base64ImgUploadReq.getFileName();

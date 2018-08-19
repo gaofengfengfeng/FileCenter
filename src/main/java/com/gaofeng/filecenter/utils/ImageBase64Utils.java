@@ -1,5 +1,6 @@
 package com.gaofeng.filecenter.utils;
 
+import com.didi.meta.javalib.JLog;
 import org.apache.commons.codec.binary.Base64;
 
 import java.io.*;
@@ -67,6 +68,7 @@ public class ImageBase64Utils {
             OutputStream outputStream = new FileOutputStream(path);
             return base64ToImageOutput(base64, outputStream);
         } catch (FileNotFoundException e) {
+            JLog.error("save img error path=" + path, 102072232);
             e.printStackTrace();
         }
         return false;
